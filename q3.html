@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопрос 3 — Виды сигналов: baseband, bandpass, сложные. Одномерные/многомерные. Параметры. База сигнала.</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #eef2f5;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 32px 24px;
+            color: #0a2a38;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: #0b2b3b;
+            color: white;
+            padding: 28px 32px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .header .q-text {
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-top: 12px;
+            opacity: 0.9;
+        }
+        .level-buttons {
+            display: flex;
+            gap: 12px;
+            padding: 20px 32px 0 32px;
+            background: white;
+            border-bottom: 1px solid #e2edf2;
+            flex-wrap: wrap;
+        }
+        .level-btn {
+            background: #eef2fa;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1f5e7e;
+        }
+        .level-btn.active {
+            background: #0077b6;
+            color: white;
+        }
+        .answer-content {
+            padding: 28px 32px;
+            line-height: 1.65;
+            font-size: 1rem;
+            color: #1f3b48;
+            text-align: justify;
+        }
+        .answer-content p {
+            margin: 0 0 16px 0;
+        }
+        .answer-content strong {
+            color: #005f8c;
+        }
+        .answer-content ul, .answer-content ol {
+            margin: 12px 0 20px 32px;
+        }
+        .answer-content li {
+            margin: 8px 0;
+        }
+        .formula {
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #fefefe;
+            padding: 12px;
+            border-radius: 24px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .note {
+            background: #f0f7fb;
+            padding: 12px 20px;
+            border-radius: 16px;
+            margin: 16px 0;
+            font-size: 0.9rem;
+            border-left: 4px solid #0077b6;
+        }
+        .two-columns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .col {
+            flex: 1;
+            min-width: 200px;
+            background: #f9fbfd;
+            padding: 16px;
+            border-radius: 20px;
+        }
+        footer {
+            background: #f8fafc;
+            padding: 16px 32px;
+            text-align: center;
+            color: #6b8fa0;
+            font-size: 0.75rem;
+            border-top: 1px solid #e2edf2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📡 Вопрос 3</h1>
+        <div class="q-text">Виды сигналов: узкополосные (bandpass), низкочастотные (baseband), сложные. Одномерные и многомерные. Параметры сигналов. База сигнала.</div>
+    </div>
 
+    <div class="level-buttons">
+        <button class="level-btn active" data-level="short">🔹 Поверхностно (база)</button>
+        <button class="level-btn" data-level="full">🔸 Полноценно (экзамен)</button>
+        <button class="level-btn" data-level="detailed">🔺 Очень подробно (мега)</button>
+    </div>
+
+    <div id="answerContainer" class="answer-content"></div>
+
+    <footer>Три уровня детализации. В мега-подробном — спектры, графики, примеры расчёта базы.</footer>
+</div>
+
+<script>
+    const answers = {
+        short: `<p><strong>📌 БАЗОВЫЙ МИНИМУМ:</strong></p>
+<p><strong>Низкочастотные (baseband):</strong> спектр от 0 Гц. Пример: звук с микрофона, видеосигнал.</p>
+<p><strong>Узкополосные (bandpass):</strong> спектр сосредоточен вокруг несущей f₀, полоса Δf << f₀. Пример: радиосигнал.</p>
+<p><strong>Сложные сигналы:</strong> база B = T·Δf >> 1 (шумоподобные).</p>
+<p><strong>Одномерные:</strong> один параметр (амплитуда от времени). <strong>Многомерные:</strong> вектор (I/Q составляющие).</p>
+<p><strong>Параметры сигналов:</strong> длительность T, ширина спектра Δf, мощность, динамический диапазон.</p>
+<p><strong>База сигнала:</strong> B = T × Δf. B≈1 — простой сигнал, B>>1 — сложный.</p>`,
+        full: `<p><strong>📘 ПОЛНОЦЕННЫЙ ОТВЕТ (ДЛЯ ЭКЗАМЕНА):</strong></p>
+
+<p><strong>1. Низкочастотные сигналы (baseband):</strong><br>
+Спектр начинается от 0 Гц и занимает полосу от 0 до F_max. Примеры: сигнал с микрофона (0-20 кГц), видеосигнал (0-6 МГц), цифровой сигнал в Ethernet. Используются в проводных линиях связи, так как не требуют переноса на несущую частоту. Ширина спектра baseband-сигнала примерно обратна длительности импульса: Δf ≈ 1/τ.</p>
+
+<p><strong>2. Узкополосные сигналы (bandpass):</strong><br>
+Спектр сосредоточен вокруг несущей частоты f₀, причём ширина спектра Δf много меньше несущей: Δf << f₀. Получаются умножением baseband-сигнала на гармоническое колебание: s(t) = s_base(t)·cos(2πf₀t). Используются в радиосвязи, телевидении, сотовых сетях. Пример: сигнал с модуляцией QPSK на несущей 2 ГГц с полосой 20 МГц.</p>
+
+<p><strong>3. Сложные сигналы:</strong><br>
+Сигналы с большой базой B = T·Δf >> 1. Их называют шумоподобными (ШПС). Применяются в системах с расширением спектра (DSSS, FHSS), в GPS, в радиолокации. Выигрыш обработки (помехоустойчивость) равен G = 10·log₁₀(B) дБ.</p>
+
+<p><strong>4. Одномерные и многомерные сигналы:</strong><br>
+• <strong>Одномерные</strong> – описываются одной функцией времени s(t). Пример: обычный синус, прямоугольный импульс.<br>
+• <strong>Многомерные</strong> – представляются вектором (s₁(t), s₂(t), …, s_n(t)). Классический пример: квадратурное представление s(t)=I(t)·cos(ωt)+Q(t)·sin(ωt), где (I, Q) — двумерный вектор. Многомерность позволяет увеличить скорость передачи данных.</p>
+
+<p><strong>5. Параметры сигналов:</strong><br>
+• <strong>Длительность T</strong> – интервал времени, на котором сигнал существенно отличен от нуля (для импульсных) или период (для периодических).<br>
+• <strong>Ширина спектра Δf</strong> – полоса частот, в которой сосредоточена основная энергия сигнала (обычно 90-99%).<br>
+• <strong>Динамический диапазон</strong> – отношение максимальной мгновенной мощности к минимальной воспринимаемой, часто в дБ.<br>
+• <strong>Пиковая и средняя мощность</strong> – важны для расчёта энергетики канала.<br>
+• <strong>Пик-фактор (PAR, PAPR)</strong> – отношение пиковой мощности к средней. Для синуса PAR=2 (3 дБ), для OFDM может достигать 12 дБ.</p>
+
+<p><strong>6. База сигнала:</strong><br>
+<div class="formula">B = T × Δf</div>
+Безразмерная величина. Для простых сигналов (одиночный прямоугольный импульс) B ≈ 1. Для сложных сигналов B может быть 100, 1000 и более. База показывает потенциал помехоустойчивости: выигрыш обработки в DSSS равен B.</p>`,
+        detailed: `<p><strong>🔺 МЕГА-ПОДРОБНО (С РИСУНКАМИ, ГРАФИКАМИ И ПРИМЕРАМИ):</strong></p>
+
+<p><strong>1. НИЗКОЧАСТОТНЫЕ СИГНАЛЫ (baseband)</strong></p>
+<div class="svg-container"><svg width="600" height="180" viewBox="0 0 600 180"><line x1="50" y1="140" x2="550" y2="140" stroke="#333" stroke-width="1.5"/><line x1="50" y1="30" x2="50" y2="150" stroke="#333" stroke-width="1.5"/><text x="30" y="20" font-size="12" fill="#333">|S(f)|</text><path d="M80 130 L120 130 L140 50 L180 130 L220 130" fill="#7fb3d5" opacity="0.6" stroke="#2c6e9e" stroke-width="2"/><text x="150" y="170" font-size="13" text-anchor="middle" font-weight="bold">Baseband</text><text x="150" y="185" font-size="11" text-anchor="middle">спектр от 0 до F_max</text><text x="140" y="80" font-size="10" fill="#2c6e9e" text-anchor="middle">Δf ≈ 1/τ</text></svg></div>
+<p><strong>Характеристики baseband-сигналов:</strong><br>
+• Спектр начинается от 0 Гц (постоянная составляющая может присутствовать или отсутствовать).<br>
+• Ширина спектра определяется длительностью самого короткого импульса: Δf ≈ 1/τ.<br>
+• Примеры: сигнал с микрофона (0-20 кГц), видеосигнал (0-6 МГц), сигналы в Ethernet (PAM-5, полоса до 125 МГц).<br>
+• Используются в проводных линиях (медные кабели, витая пара).</p>
+
+<p><strong>2. УЗКОПОЛОСНЫЕ СИГНАЛЫ (bandpass)</strong></p>
+<div class="svg-container"><svg width="600" height="180" viewBox="0 0 600 180"><line x1="50" y1="140" x2="550" y2="140" stroke="#333" stroke-width="1.5"/><line x1="50" y1="30" x2="50" y2="150" stroke="#333" stroke-width="1.5"/><text x="30" y="20" font-size="12" fill="#333">|S(f)|</text><path d="M350 130 L380 60 L410 130 L440 130 L470 60 L500 130" fill="#d5987f" opacity="0.6" stroke="#b64a1a" stroke-width="2"/><text x="425" y="170" font-size="13" text-anchor="middle" font-weight="bold">Bandpass</text><text x="425" y="185" font-size="11" text-anchor="middle">спектр вокруг несущей f₀</text><line x1="380" y1="135" x2="380" y2="145" stroke="#b64a1a" stroke-width="1.5"/><line x1="470" y1="135" x2="470" y2="145" stroke="#b64a1a" stroke-width="1.5"/><text x="425" y="55" font-size="11" fill="#b64a1a" text-anchor="middle">Δf &lt;&lt; f₀</text><text x="425" y="90" font-size="11" fill="#b64a1a" text-anchor="middle">f₀</text></svg></div>
+<p><strong>Характеристики bandpass-сигналов:</strong><br>
+• Спектр сосредоточен в окрестности несущей частоты f₀.<br>
+• Условие узкополосности: Δf << f₀ (обычно Δf ≤ 0.1 f₀).<br>
+• Получаются умножением baseband-сигнала на гармоническое колебание: s(t) = a(t)·cos(2πf₀t + φ(t)).<br>
+• Примеры: все радиосигналы (FM-радио, телевидение, сотовые сети, WiFi, спутниковая связь).<br>
+• Преимущество: возможность частотного разделения каналов (FDMA) и эффективная антенна (размер антенны ~ λ).</p>
+
+<p><strong>3. СЛОЖНЫЕ СИГНАЛЫ (шумоподобные)</strong></p>
+<div class="svg-container"><svg width="500" height="160" viewBox="0 0 500 160"><rect x="30" y="20" width="200" height="110" fill="#d0e8f0" stroke="#0077b6" rx="10"/><text x="130" y="55" font-size="14" text-anchor="middle" font-weight="bold">Простой сигнал</text><text x="130" y="80" font-size="12" text-anchor="middle">B = T·Δf ≈ 1</text><text x="130" y="100" font-size="11" text-anchor="middle">пример: прямоугольный</text><text x="130" y="115" font-size="11" text-anchor="middle">импульс</text><rect x="270" y="20" width="200" height="110" fill="#ffe0cc" stroke="#e67e22" rx="10"/><text x="370" y="55" font-size="14" text-anchor="middle" font-weight="bold">Сложный сигнал</text><text x="370" y="80" font-size="12" text-anchor="middle">B = T·Δf ≫ 1</text><text x="370" y="100" font-size="11" text-anchor="middle">пример: M-последовательность</text><text x="370" y="115" font-size="11" text-anchor="middle">B = 1023, G = 30 дБ</text></svg></div>
+<p><strong>Характеристики сложных сигналов:</strong><br>
+• База B = T·Δf >> 1.<br>
+• Обладают высокой помехоустойчивостью: выигрыш обработки G = 10·log₁₀(B) дБ.<br>
+• Трудно перехватить и подавить (скрытность).<br>
+• Примеры: M-последовательности (B=1023 в GPS), коды Баркера (B=13), сигналы с линейной частотной модуляцией (ЛЧМ, B=100-1000), сигналы в системах CDMA и DSSS.<br>
+• Применение: GPS, спутниковая связь, военные системы, радиолокация с высокой разрешающей способностью.</p>
+
+<p><strong>4. ОДНОМЕРНЫЕ И МНОГОМЕРНЫЕ СИГНАЛЫ</strong></p>
+<div class="svg-container"><svg width="500" height="160" viewBox="0 0 500 160"><text x="120" y="30" font-size="13" fill="#0077b6" text-anchor="middle">Одномерный сигнал</text><path d="M30 70 Q80 40 130 70 Q180 100 230 70" fill="none" stroke="#0077b6" stroke-width="2"/><text x="130" y="110" font-size="10" text-anchor="middle">s(t) — скаляр</text><text x="370" y="30" font-size="13" fill="#e67e22" text-anchor="middle">Многомерный сигнал</text><line x1="280" y1="70" x2="330" y2="50" stroke="#e67e22" stroke-width="2"/><line x1="330" y1="50" x2="380" y2="70" stroke="#e67e22" stroke-width="2"/><text x="330" y="110" font-size="10" text-anchor="middle">вектор (I(t), Q(t))</text></svg></div>
+<p><strong>Одномерные сигналы:</strong> описываются одной функцией времени. Примеры: s(t)=A·cos(ωt), s(t)=A·rect(t/τ).<br>
+<strong>Многомерные сигналы:</strong> описываются вектором функций. В радиосвязи чаще всего используются двумерные сигналы в квадратурном представлении: s(t)=I(t)·cos(ωt)+Q(t)·sin(ωt). Здесь (I,Q) — координаты в сигнальном созвездии (QAM, QPSK). Многомерность позволяет передавать больше бит в одном символе (спектральная эффективность).<br>
+<strong>Пример: QPSK</strong> имеет 4 точки созвездия (I,Q) = (±1/√2, ±1/√2) — это 2 бита на символ. 16QAM — 4 бита/символ (16 точек).</p>
+
+<p><strong>5. ПАРАМЕТРЫ СИГНАЛОВ (ПОДРОБНО)</strong></p>
+<ul>
+<li><strong>Длительность T (с):</strong> для импульсных сигналов — время, в течение которого сигнал отличен от нуля. Для периодических — период. Определяется требованием к скорости передачи: чем короче импульс, тем выше скорость.</li>
+<li><strong>Ширина спектра Δf (Гц):</strong> полоса частот, содержащая основную энергию сигнала (часто 90% или уровень -3 дБ). Связана с длительностью принципом неопределённости: Δf·τ ≥ const (≈ 0.5 для прямоугольного импульса).</li>
+<li><strong>Динамический диапазон (дБ):</strong> D = 20·log₁₀(макс. амплитуда / мин. амплитуда). Важен для АЦП и усилителей.</li>
+<li><strong>Пиковая мощность P_peak:</strong> P_peak = max|s(t)|².</li>
+<li><strong>Средняя мощность P_avg:</strong> для периодического сигнала P_avg = (1/T)∫|s(t)|²dt; для случайного — математическое ожидание квадрата.</li>
+<li><strong>Пик-фактор (PAPR):</strong> PAR = P_peak / P_avg (или в дБ: PAR_дБ = 10·log₁₀(PAPR)). Для синусоиды PAR=2 (3 дБ), для прямоугольного меандра PAR=1 (0 дБ), для OFDM PAR может достигать 12 дБ — это проблема, требующая использования линейных усилителей с запасом.</li>
+</ul>
+
+<p><strong>6. БАЗА СИГНАЛА — КЛЮЧЕВОЕ ПОНЯТИЕ</strong></p>
+<div class="formula">B = T × Δf</div>
+<p><strong>Физический смысл:</strong> база равна числу независимых отсчётов (степеней свободы) сигнала. По теореме Котельникова, сигнал длительностью T и полосой Δf можно представить примерно 2Δf·T отсчётами. Если эти отсчёты независимы, то B ≈ 2·(T·Δf). Часто используют B = T·Δf без коэффициента 2.</p>
+<p><strong>Классификация по базе:</strong><br>
+• <strong>Простые сигналы (B ≈ 1):</strong> прямоугольный импульс, радиоимпульс без внутриимпульсной модуляции, синусоидальный отрезок. Их нельзя сжать по времени или частоте — произведение T·Δf минимально.<br>
+• <strong>Сложные сигналы (B >> 1):</strong> сигналы с внутриимпульсной модуляцией (ЛЧМ, фазоманипулированные, шумоподобные). Выигрыш обработки G = 10·log₁₀(B) дБ.</p>
+
+<p><strong>Примеры расчёта базы:</strong><br>
+• Прямоугольный импульс длительностью τ = 1 мкс. Ширина его спектра по нулям Δf = 2/τ = 2 МГц. База B = τ·Δf = 10⁻⁶·2·10⁶ = 2. ≈ 2 (простой сигнал).<br>
+• Сигнал GPS C/A-код: длительность одного бита T = 1 мс, ширина спектра Δf = 1.023 МГц (частота чипов). База B = 10⁻³·1.023·10⁶ = 1023. Это сложный сигнал, выигрыш обработки G = 10·log₁₀(1023) ≈ 30 дБ.<br>
+• Сигнал с линейной частотной модуляцией (ЛЧМ): T = 100 мкс, Δf = 10 МГц, B = 10⁻⁴·10⁷ = 1000. Используется в радиолокации для увеличения разрешающей способности.</p>
+
+<div class="svg-container"><svg width="500" height="100" viewBox="0 0 500 100"><rect x="30" y="20" width="200" height="60" fill="#d0e8f0" stroke="#0077b6" rx="8"/><text x="130" y="50" font-size="12" text-anchor="middle">B = 2 (простой)</text><rect x="270" y="20" width="200" height="60" fill="#ffe0cc" stroke="#e67e22" rx="8"/><text x="370" y="50" font-size="12" text-anchor="middle">B = 1023 (сложный)</text></svg></div>
+
+<div class="note"><strong>💡 ИТОГ ДЛЯ ЭКЗАМЕНА:</strong><br>
+• Baseband — спектр от 0, bandpass — вокруг несущей, сложные — большая база.<br>
+• Многомерные сигналы — I/Q — основа QAM.<br>
+• База B = T·Δf — ключевая характеристика.<br>
+• B≈1 — простой сигнал, B>>1 — сложный (выигрыш по помехоустойчивости).</div>`
+    };
+
+    function setLevel(level) {
+        document.getElementById('answerContainer').innerHTML = answers[level];
+        document.querySelectorAll('.level-btn').forEach(btn => {
+            if (btn.getAttribute('data-level') === level) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    document.querySelectorAll('.level-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setLevel(btn.getAttribute('data-level'));
+        });
+    });
+
+    setLevel('short');
+</script>
+</body>
+</html>
