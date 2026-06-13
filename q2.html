@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вопрос 1 — Схема передачи информации, понятия, модели каналов</title>
+    <title>Вопрос 2 — Классификация видов сигналов</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -109,6 +109,19 @@
             font-size: 0.9rem;
             border-left: 4px solid #0077b6;
         }
+        .two-columns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .col {
+            flex: 1;
+            min-width: 200px;
+            background: #f9fbfd;
+            padding: 16px;
+            border-radius: 20px;
+        }
         footer {
             background: #f8fafc;
             padding: 16px 32px;
@@ -122,8 +135,8 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>📡 Вопрос 1</h1>
-        <div class="q-text">Схема процесса передачи информации: нарисовать информацию, сообщение, электрический сигнал, радио сигнал, влияние помех, принимаемый сигнал и сообщение. Понятие «система электросвязи», «линия связи», «канал связи». Модели каналов связи: канал с AWGN, канал с многолучевым распространением.</div>
+        <h1>📡 Вопрос 2</h1>
+        <div class="q-text">Классификация видов сигналов: по виду передаваемого сообщения, по форме сигнала во временной области, по способам математического представления и характеру физического процесса (случайный / неслучайный).</div>
     </div>
 
     <div class="level-buttons">
@@ -134,96 +147,81 @@
 
     <div id="answerContainer" class="answer-content"></div>
 
-    <footer>Три уровня детализации. В мега-подробном — все 7 этапов с рисунками и модели каналов.</footer>
+    <footer>Три уровня детализации. В мега-подробном — рисунки для каждого признака + дополнительные классификации.</footer>
 </div>
 
 <script>
     const answers = {
         short: `<p><strong>📌 БАЗОВЫЙ МИНИМУМ:</strong></p>
-<p>Схема: <strong>Информация</strong> → <strong>сообщение</strong> (биты) → <strong>электрический сигнал</strong> (напряжение) → <strong>радиосигнал</strong> (модулированная несущая) → <strong>линия связи + помехи</strong> → <strong>принимаемый сигнал</strong> → <strong>принятое сообщение</strong>.</p>
-<p><strong>Понятия:</strong><br>
-• <strong>Система электросвязи</strong> – техника + среда для передачи информации.<br>
-• <strong>Линия связи</strong> – физическая среда (кабель, оптоволокно, эфир).<br>
-• <strong>Канал связи</strong> – линия + шумы + искажения + обработка.</p>
-<p><strong>Модели каналов:</strong><br>
-• <strong>AWGN</strong> – аддитивный белый гауссов шум: r(t) = s(t) + n(t).<br>
-• <strong>Многолучевой</strong> – сигнал приходит несколькими путями: r(t) = Σ aₖ·s(t-τₖ) + n(t).</p>`,
+<p><strong>1. По виду передаваемого сообщения:</strong> речь, музыка, текст, изображение, видео.</p>
+<p><strong>2. По форме сигнала во временной области:</strong><br>
+• <strong>Аналоговый</strong> – непрерывный по уровню и времени.<br>
+• <strong>Дискретный</strong> – определён только в моменты отсчётов.<br>
+• <strong>Цифровой</strong> – квантованный по уровню + дискретный по времени.</p>
+<p><strong>3. По способам математического представления:</strong><br>
+• <strong>Детерминированный</strong> – описывается точной формулой (например, sin).<br>
+• <strong>Случайный</strong> – описывается вероятностными характеристиками (шум).</p>
+<p><strong>4. По характеру физического процесса:</strong> случайный / неслучайный (детерминированный).</p>`,
         full: `<p><strong>📘 ПОЛНОЦЕННЫЙ ОТВЕТ (ДЛЯ ЭКЗАМЕНА):</strong></p>
-<p><strong>Схема процесса передачи информации (основные этапы):</strong></p>
-<div class="svg-container">
-<svg width="750" height="180" viewBox="0 0 750 180" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="50" width="75" height="40" fill="#e0f0ff" stroke="#0077b6" rx="6"/>
-    <text x="47" y="74" font-size="11" text-anchor="middle">Информация</text>
-    <line x1="85" y1="70" x2="110" y2="70" stroke="#0077b6"/>
-    <rect x="110" y="50" width="75" height="40" fill="#e0f0ff" stroke="#0077b6" rx="6"/>
-    <text x="147" y="74" font-size="11" text-anchor="middle">Сообщение</text>
-    <line x1="185" y1="70" x2="210" y2="70" stroke="#0077b6"/>
-    <rect x="210" y="50" width="85" height="40" fill="#e0f0ff" stroke="#0077b6" rx="6"/>
-    <text x="252" y="74" font-size="11" text-anchor="middle">Эл.сигнал</text>
-    <line x1="295" y1="70" x2="320" y2="70" stroke="#0077b6"/>
-    <rect x="320" y="50" width="80" height="40" fill="#e0f0ff" stroke="#0077b6" rx="6"/>
-    <text x="360" y="74" font-size="11" text-anchor="middle">Радиосигнал</text>
-    <line x1="400" y1="70" x2="425" y2="70" stroke="#0077b6"/>
-    <rect x="425" y="40" width="85" height="40" fill="#ffe0e0" stroke="#b60000" rx="6"/>
-    <text x="467" y="64" font-size="10" text-anchor="middle">Помехи</text>
-    <line x1="510" y1="60" x2="535" y2="60" stroke="#0077b6"/>
-    <rect x="535" y="40" width="95" height="40" fill="#e0f0ff" stroke="#0077b6" rx="6"/>
-    <text x="582" y="64" font-size="10" text-anchor="middle">Принятый</text>
-    <text x="582" y="76" font-size="9" text-anchor="middle">сигнал</text>
-    <line x1="630" y1="60" x2="655" y2="60" stroke="#0077b6"/>
-    <rect x="655" y="50" width="75" height="40" fill="#e0f0ff" stroke="#0077b6" rx="6"/>
-    <text x="692" y="74" font-size="11" text-anchor="middle">Сообщение</text>
-</svg>
+
+<p><strong>1. По виду передаваемого сообщения:</strong><br>
+• <strong>Речь</strong> – полоса 300–3400 Гц (телефония) или 20–20000 Гц (Hi-Fi).<br>
+• <strong>Музыка</strong> – широкополосный сигнал до 20 кГц.<br>
+• <strong>Текст</strong> – дискретные символы, преобразуются в биты (ASCII, Unicode).<br>
+• <strong>Изображение</strong> – двумерный массив пикселей, после развёртки – видеосигнал до 6 МГц.<br>
+• <strong>Видео</strong> – последовательность кадров + звук, требует сжатия (MPEG, H.264).</p>
+
+<p><strong>2. По форме сигнала во временной области:</strong><br>
+• <strong>Аналоговый</strong> – s(t) определён в каждый момент времени, принимает любые значения из непрерывного диапазона. Пример: напряжение с микрофона.<br>
+• <strong>Дискретный по времени</strong> – определён только в дискретные моменты времени t = nT (отсчёты). Пример: s[n] = s(nT).<br>
+• <strong>Цифровой (квантованный)</strong> – каждый отсчёт принадлежит конечному множеству уровней. Пример: PCM (импульсно-кодовая модуляция).</p>
+
+<p><strong>3. По способам математического представления:</strong><br>
+• <strong>Детерминированный</strong> – можно вычислить значение в любой момент по формуле. Пример: s(t)=A·cos(2πft+φ), s(t)=A·rect(t/τ), s(t)=A·sinc(πt/τ).<br>
+• <strong>Случайный</strong> – невозможно предсказать точное значение, только вероятностные характеристики: плотность распределения p(x), матожидание m(t), дисперсия D(t), корреляционная функция B(t₁,t₂). Пример: белый гауссовский шум n(t).</p>
+
+<p><strong>4. По характеру физического процесса:</strong><br>
+• <strong>Случайный процесс</strong> – сигнал с хаотическими флуктуациями (тепловой шум, речевой сигнал, замирания в канале).<br>
+• <strong>Неслучайный (детерминированный)</strong> – сигнал, полностью известный во времени (синусоида, меандр, прямоугольный импульс).</p>`,
+        detailed: `<p><strong>🔺 МЕГА-ПОДРОБНО (С РИСУНКАМИ И РАСШИРЕННОЙ КЛАССИФИКАЦИЕЙ):</strong></p>
+
+<p><strong>1. ПО ВИДУ ПЕРЕДАВАЕМОГО СООБЩЕНИЯ</strong></p>
+<div class="svg-container"><svg width="600" height="120" viewBox="0 0 600 120"><rect x="10" y="10" width="100" height="40" fill="#e0f0ff" stroke="#0077b6" rx="8"/><text x="60" y="35" font-size="11" text-anchor="middle">Речь</text><rect x="120" y="10" width="100" height="40" fill="#e0f0ff" stroke="#0077b6" rx="8"/><text x="170" y="35" font-size="11" text-anchor="middle">Музыка</text><rect x="230" y="10" width="100" height="40" fill="#e0f0ff" stroke="#0077b6" rx="8"/><text x="280" y="35" font-size="11" text-anchor="middle">Текст</text><rect x="340" y="10" width="100" height="40" fill="#e0f0ff" stroke="#0077b6" rx="8"/><text x="390" y="35" font-size="11" text-anchor="middle">Изображение</text><rect x="450" y="10" width="100" height="40" fill="#e0f0ff" stroke="#0077b6" rx="8"/><text x="500" y="35" font-size="11" text-anchor="middle">Видео</text><text x="300" y="80" font-size="11" fill="#005f8c" text-anchor="middle">Каждый вид требует своей полосы частот и способа обработки</text></svg></div>
+<p><strong>Речь:</strong> аналоговый сигнал с эффективной полосой 300-3400 Гц (для телефонной связи) или до 20 кГц для качественной передачи. После АЦП — цифровой поток 64–128 кбит/с (кодеки ADPCM, MP3).<br>
+<strong>Музыка:</strong> широкополосный сигнал 20 Гц – 20 кГц, требует скорости 1.4 Мбит/с без сжатия, после MP3 — 128–320 кбит/с.<br>
+<strong>Текст:</strong> дискретные символы, кодируются ASCII (7-8 бит/символ) или Unicode (16-32 бит). Скорость низкая.<br>
+<strong>Изображение:</strong> после развёртки становится видеосигналом с полосой до 6 МГц (стандартное ТВ). В цифре — JPEG сжатие.<br>
+<strong>Видео:</strong> последовательность кадров (25–60 кадров/с) + звук. Без сжатия — сотни Мбит/с, после H.264/H.265 — 1–20 Мбит/с.</p>
+
+<p><strong>2. ПО ФОРМЕ СИГНАЛА ВО ВРЕМЕННОЙ ОБЛАСТИ</strong></p>
+<div class="svg-container"><svg width="700" height="180" viewBox="0 0 700 180"><text x="100" y="25" font-size="12" fill="#0077b6" text-anchor="middle">Аналоговый</text><path d="M30 60 Q80 20 130 60 Q180 100 230 60 Q280 20 330 60" fill="none" stroke="#0077b6" stroke-width="2"/><text x="400" y="25" font-size="12" fill="#e67e22" text-anchor="middle">Дискретный</text><line x1="370" y1="60" x2="370" y2="30" stroke="#e67e22" stroke-width="2"/><circle cx="370" cy="30" r="3" fill="#e67e22"/><line x1="420" y1="60" x2="420" y2="80" stroke="#e67e22" stroke-width="2"/><circle cx="420" cy="80" r="3" fill="#e67e22"/><text x="600" y="25" font-size="12" fill="#b64a1a" text-anchor="middle">Цифровой</text><rect x="530" y="40" width="20" height="40" fill="#b64a1a"/><rect x="560" y="40" width="20" height="40" fill="white" stroke="#b64a1a" stroke-width="1.5"/><rect x="590" y="40" width="20" height="40" fill="#b64a1a"/><rect x="620" y="40" width="20" height="40" fill="#b64a1a"/><text x="100" y="120" font-size="10" text-anchor="middle">Непрерывный</text><text x="100" y="135" font-size="10" text-anchor="middle">по уровню и времени</text><text x="400" y="120" font-size="10" text-anchor="middle">Только в моменты</text><text x="400" y="135" font-size="10" text-anchor="middle">отсчётов</text><text x="600" y="120" font-size="10" text-anchor="middle">Квантованный</text><text x="600" y="135" font-size="10" text-anchor="middle">по уровню</text></svg></div>
+<p><strong>Аналоговый сигнал:</strong> s(t) ∈ ℝ, определён в каждый момент, непрерывен по уровню. Пример: напряжение на выходе микрофона, сигнал с датчика температуры.<br>
+<strong>Дискретный по времени:</strong> последовательность отсчётов s[n] = s(nT). Получается после дискретизации аналогового сигнала. Частота дискретизации f_д = 1/T.<br>
+<strong>Цифровой сигнал:</strong> дискретный по времени и квантованный по уровню — каждый отсчёт принадлежит конечному множеству значений (например, 8-битный АЦП даёт 256 уровней).</p>
+
+<p><strong>3. ПО СПОСОБАМ МАТЕМАТИЧЕСКОГО ПРЕДСТАВЛЕНИЯ</strong></p>
+<div class="two-columns">
+<div class="col"><strong>ДЕТЕРМИНИРОВАННЫЙ</strong><br>• Точная формула<br>• Пример: s(t)=A·cos(2πft+φ)<br>• Энергия E=∫|s|²dt<br>• Спектр S(f)=∫s(t)e^{-j2πft}dt</div>
+<div class="col"><strong>СЛУЧАЙНЫЙ</strong><br>• Вероятностное описание<br>• Пример: n(t) – белый шум<br>• Матожидание m(t)=E[X(t)]<br>• Дисперсия D(t)=E[(X(t)-m)²]<br>• Корреляция B(τ)=E[X(t)X(t+τ)]</div>
 </div>
-<p><strong>Определения:</strong><br>
-✔ <strong>Система электросвязи</strong> – совокупность технических средств (кодеры, модуляторы, усилители) и среды распространения, обеспечивающая передачу информации.<br>
-✔ <strong>Линия связи</strong> – физическая среда: витая пара, коаксиал, оптоволокно, радиоканал.<br>
-✔ <strong>Канал связи</strong> – математическая модель, включающая линию, шумы, искажения и обработку сигнала.</p>
-<p><strong>Модели каналов:</strong><br>
-• <strong>AWGN</strong>: r(t) = s(t) + n(t), где n(t) – белый гауссовский шум со спектральной плотностью N₀/2.<br>
-• <strong>Многолучевой</strong>: r(t) = Σ aₖ·s(t-τₖ) + n(t) – сигнал идёт по разным путям, вызывая замирания.</p>`,
-        detailed: `<p><strong>🔺 МЕГА-ПОДРОБНО (С РИСУНКАМИ КАЖДОГО ЭТАПА И МОДЕЛЕЙ):</strong></p>
+<p><strong>Детерминированный сигнал</strong> – можно вычислить в любой момент времени. Примеры: s(t)=sinc(πt/τ), s(t)=A·rect(t/τ). Для таких сигналов определены преобразование Фурье, энергия.<br>
+<strong>Случайный сигнал</strong> – нельзя предсказать точное значение, только вероятностные характеристики. Пример: тепловой шум резистора (гауссовское распределение), речевой сигнал (нестационарный). Для стационарных случайных процессов используется теорема Винера-Хинчина: G(f)=∫B(τ)e^{-j2πfτ}dτ.</p>
 
-<p><strong>1. ИНФОРМАЦИЯ</strong></p>
-<div class="svg-container"><svg width="300" height="70" viewBox="0 0 300 70"><rect x="20" y="10" width="260" height="50" fill="#e0f0ff" stroke="#0077b6" rx="12"/><text x="150" y="42" font-size="14" text-anchor="middle" font-weight="bold">Текст / Звук / Изображение</text></svg></div>
-<p>Абстракция, которую нужно передать. Может быть аналоговой (голос) или дискретной (текст). На этом этапе сигнала нет.</p>
+<p><strong>4. ПО ХАРАКТЕРУ ФИЗИЧЕСКОГО ПРОЦЕССА</strong></p>
+<div class="svg-container"><svg width="600" height="100" viewBox="0 0 600 100"><rect x="30" y="20" width="240" height="50" fill="#d0f0d0" stroke="#2e7d32" rx="10"/><text x="150" y="50" font-size="12" text-anchor="middle" font-weight="bold">Случайный процесс</text><rect x="330" y="20" width="240" height="50" fill="#ffe0cc" stroke="#e67e22" rx="10"/><text x="450" y="50" font-size="12" text-anchor="middle" font-weight="bold">Неслучайный (детерминированный)</text></svg></div>
+<p><strong>Случайный процесс:</strong> сигнал, значения которого в разные моменты времени связаны вероятностными законами. Примеры: шум приёмника, атмосферные помехи, замирания в радиоканале (рэлеевские/райсовские), речевой сигнал (нестационарный).<br>
+<strong>Неслучайный (детерминированный):</strong> сигнал, который можно описать аналитической функцией. Примеры: синусоидальное колебание, меандр, последовательность импульсов с известными параметрами.</p>
 
-<p><strong>2. СООБЩЕНИЕ (битовый поток)</strong></p>
-<div class="svg-container"><svg width="450" height="75" viewBox="0 0 450 75"><line x1="20" y1="37" x2="430" y2="37" stroke="#aaa" stroke-dasharray="3,3"/><rect x="30" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="46" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="72" y="8" width="32" height="58" fill="white" stroke="#0077b6" stroke-width="2" rx="4"/><text x="88" y="44" font-size="14" text-anchor="middle">0</text><rect x="114" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="130" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="156" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="172" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="198" y="8" width="32" height="58" fill="white" stroke="#0077b6" stroke-width="2" rx="4"/><text x="214" y="44" font-size="14" text-anchor="middle">0</text><rect x="240" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="256" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="282" y="8" width="32" height="58" fill="white" stroke="#0077b6" stroke-width="2" rx="4"/><text x="298" y="44" font-size="14" text-anchor="middle">0</text><rect x="324" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="340" y="44" font-size="14" fill="white" text-anchor="middle">1</text></svg><p><em>Последовательность битов (пример: 1 0 1 1 0 1 0 1)</em></p></div>
+<p><strong>📚 ДОПОЛНИТЕЛЬНЫЕ КЛАССИФИКАЦИИ (часто спрашивают):</strong></p>
+<p><strong>По длительности:</strong> финитные (ограниченные во времени, например, импульсы) и бесконечные (периодические сигналы).<br>
+<strong>По спектру:</strong> низкочастотные (baseband) и узкополосные (bandpass).<br>
+<strong>По энергии:</strong> энергетические (E < ∞) и мощностные (P > 0, E = ∞).<br>
+<strong>По периодичности:</strong> периодические (s(t+T)=s(t)) и непериодические.</p>
 
-<p><strong>3. ЭЛЕКТРИЧЕСКИЙ СИГНАЛ (NRZ)</strong></p>
-<div class="svg-container"><svg width="550" height="100" viewBox="0 0 550 100"><line x1="20" y1="50" x2="530" y2="50" stroke="#333" stroke-width="1"/><path d="M30 20 L95 20 L95 80 L160 80 L160 20 L225 20 L225 20 L290 20 L290 80 L355 80 L355 20 L420 20 L420 80 L485 80 L485 50" fill="none" stroke="#0077b6" stroke-width="2.5"/><text x="62" y="15" font-size="10" text-anchor="middle">1</text><text x="127" y="92" font-size="10" text-anchor="middle">0</text><text x="192" y="15" font-size="10" text-anchor="middle">1</text><text x="257" y="15" font-size="10" text-anchor="middle">1</text><text x="322" y="92" font-size="10" text-anchor="middle">0</text><text x="387" y="15" font-size="10" text-anchor="middle">1</text><text x="452" y="92" font-size="10" text-anchor="middle">0</text></svg><p><em>Уровень +5В = бит 1, 0В = бит 0. Прямоугольные импульсы (NRZ — Non-Return to Zero).</em></p></div>
-
-<p><strong>4. РАДИОСИГНАЛ (BPSK-модуляция)</strong></p>
-<div class="svg-container"><svg width="550" height="100" viewBox="0 0 550 100"><line x1="20" y1="50" x2="530" y2="50" stroke="#333" stroke-width="1"/><path d="M30 50 Q55 20 80 50 Q105 80 130 50 Q155 20 180 50 Q205 80 230 50 Q255 20 280 50 Q305 80 330 50 Q355 20 380 50 Q405 80 430 50 Q455 20 480 50 Q505 80 530 50" fill="none" stroke="#e67e22" stroke-width="2.5"/><text x="80" y="90" font-size="9" text-anchor="middle">бит1</text><text x="205" y="90" font-size="9" text-anchor="middle">бит0</text><text x="330" y="90" font-size="9" text-anchor="middle">бит1</text><text x="455" y="90" font-size="9" text-anchor="middle">бит0</text></svg><p><em>Фаза несущей: 0° для бита 1, 180° для бита 0. s(t) = A·cos(2πf₀t + π·bit).</em></p></div>
-
-<p><strong>5. ВЛИЯНИЕ ПОМЕХ (аддитивный шум)</strong></p>
-<div class="svg-container"><svg width="550" height="100" viewBox="0 0 550 100"><line x1="20" y1="50" x2="530" y2="50" stroke="#333" stroke-width="1"/><path d="M30 50 L55 42 L80 55 L105 48 L130 55 L155 50 L180 42 L205 55 L230 48 L255 55 L280 50 L305 42 L330 55 L355 48 L380 55 L405 50 L430 42 L455 55 L480 48 L505 55 L530 50" fill="none" stroke="#b60000" stroke-width="1.5"/><text x="280" y="25" font-size="11" fill="#b60000" text-anchor="middle">Шум n(t) — белый гауссовский (AWGN)</text></svg></div>
-
-<p><strong>6. ПРИНИМАЕМЫЙ СИГНАЛ (сигнал + шум)</strong></p>
-<div class="svg-container"><svg width="550" height="100" viewBox="0 0 550 100"><line x1="20" y1="50" x2="530" y2="50" stroke="#333" stroke-width="1"/><path d="M30 50 Q55 35 80 55 Q105 65 130 50 Q155 35 180 55 Q205 65 230 50 Q255 35 280 55 Q305 65 330 50 Q355 35 380 55 Q405 65 430 50 Q455 35 480 55 Q505 65 530 50" fill="none" stroke="#b64a1a" stroke-width="2" stroke-dasharray="4,2"/><text x="280" y="20" font-size="11" fill="#b64a1a" text-anchor="middle">r(t) = s(t) + n(t)</text></svg></div>
-
-<p><strong>7. ПРИНЯТОЕ СООБЩЕНИЕ (после демодуляции)</strong></p>
-<div class="svg-container"><svg width="450" height="75" viewBox="0 0 450 75"><line x1="20" y1="37" x2="430" y2="37" stroke="#aaa" stroke-dasharray="3,3"/><rect x="30" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="46" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="72" y="8" width="32" height="58" fill="white" stroke="#0077b6" stroke-width="2" rx="4"/><text x="88" y="44" font-size="14" text-anchor="middle">0</text><rect x="114" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="130" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="156" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="172" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="198" y="8" width="32" height="58" fill="white" stroke="#0077b6" stroke-width="2" rx="4"/><text x="214" y="44" font-size="14" text-anchor="middle">0</text><rect x="240" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="256" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="282" y="8" width="32" height="58" fill="#0077b6" rx="4"/><text x="298" y="44" font-size="14" fill="white" text-anchor="middle">1</text><rect x="324" y="8" width="32" height="58" fill="white" stroke="#0077b6" stroke-width="2" rx="4"/><text x="340" y="44" font-size="14" text-anchor="middle">0</text></svg><p><em>Возможны ошибки из-за шума (в примере последний бит искажён: было 1, стало 0)</em></p></div>
-
-<p><strong>📌 ПОНЯТИЯ:</strong><br>
-✔ <strong>Система электросвязи</strong> – всё оборудование от отправителя до получателя: кодеры, модуляторы, усилители, кабели, антенны, декодеры. Примеры: сотовая сеть (GSM/LTE/5G), спутниковая связь (DVB-S2), оптоволоконные линии (GPON).<br>
-✔ <strong>Линия связи</strong> – физический объект: витая пара Cat5e (100 м, 1 Гбит/с), коаксиальный кабель (RG-6, до 500 МГц), одномодовое оптоволокно (до 100 км без регенерации), радиоканал (эфир). Характеристики: затухание (дБ/км), полоса пропускания, волновое сопротивление.<br>
-✔ <strong>Канал связи</strong> – математическая модель, включающая линию, фильтры, шумы, искажения, многолучевость. Используется для расчёта вероятности ошибки (BER) и пропускной способности.</p>
-
-<p><strong>📊 МОДЕЛИ КАНАЛОВ:</strong></p>
-
-<p><strong>Модель AWGN (Additive White Gaussian Noise):</strong></p>
-<div class="formula">r(t) = s(t) + n(t)</div>
-<div class="svg-container"><svg width="500" height="90" viewBox="0 0 500 90"><rect x="20" y="25" width="100" height="40" fill="#d0e8f0" stroke="#0077b6" rx="6"/><text x="70" y="50" font-size="11" text-anchor="middle">s(t)</text><line x1="120" y1="45" x2="150" y2="45" stroke="#0077b6"/><circle cx="165" cy="45" r="18" fill="none" stroke="#e67e22" stroke-width="2"/><text x="165" y="50" font-size="14" text-anchor="middle">+</text><line x1="183" y1="45" x2="210" y2="45" stroke="#0077b6"/><rect x="210" y="25" width="100" height="40" fill="#ffe0e0" stroke="#b60000" rx="6"/><text x="260" y="50" font-size="11" text-anchor="middle">n(t)</text><line x1="310" y1="45" x2="340" y2="45" stroke="#0077b6"/><rect x="340" y="25" width="100" height="40" fill="#d0f0d0" stroke="#2e7d32" rx="6"/><text x="390" y="50" font-size="11" text-anchor="middle">r(t)</text></svg></div>
-<p>Спектральная плотность мощности шума G_n(f) = N₀/2 Вт/Гц. Автокорреляция B_n(τ) = (N₀/2)·δ(τ). Эталонная модель, используется для сравнения помехоустойчивости систем.</p>
-
-<p><strong>Модель многолучевого канала:</strong></p>
-<div class="formula">r(t) = Σ_{k=1}^{L} aₖ·s(t-τₖ) + n(t)</div>
-<div class="svg-container"><svg width="600" height="160" viewBox="0 0 600 160"><rect x="20" y="60" width="80" height="40" fill="#d0e8f0" stroke="#0077b6" rx="6"/><text x="60" y="84" font-size="12" text-anchor="middle">Передатчик</text><line x1="100" y1="80" x2="130" y2="80" stroke="#0077b6"/><path d="M130 80 L180 45 L230 80 L280 115 L330 80" stroke="#ff9900" stroke-width="2" fill="none" stroke-dasharray="4,3"/><circle cx="180" cy="45" r="4" fill="#ff9900"/><circle cx="280" cy="115" r="4" fill="#ff9900"/><line x1="330" y1="80" x2="360" y2="80" stroke="#0077b6"/><rect x="360" y="60" width="80" height="40" fill="#d0e8f0" stroke="#0077b6" rx="6"/><text x="400" y="84" font-size="12" text-anchor="middle">Приёмник</text><text x="230" y="30" font-size="11" fill="#ff9900" text-anchor="middle">Прямой луч</text><text x="280" y="140" font-size="11" fill="#ff9900" text-anchor="middle">Отражённый луч</text></svg></div>
-<p>Сигнал приходит несколькими путями с разными задержками τₖ и ослаблениями aₖ. Возникает частотно-селективные замирания. Борьба: RAKE-приёмник (собирает энергию всех лучей), OFDM (превращает канал в набор плоских подканалов).</p>
-
-<div class="note"><strong>💡 ИТОГ:</strong> Схема включает 7 этапов. Система электросвязи — оборудование + среда. Линия — физика. Канал — математика. AWGN — простейшая модель с белым шумом. Многолучевой — с отражениями и замираниями.</div>`
+<div class="note"><strong>💡 ПРИМЕРЫ ДЛЯ ЭКЗАМЕНА:</strong><br>
+• Детерминированный аналоговый: s(t)=10·cos(2000πt+π/4)<br>
+• Случайный цифровой: последовательность битов с шумом, распределение Бернулли<br>
+• Дискретный детерминированный: s[n]=cos(0.3πn)</div>`
     };
 
     function setLevel(level) {
